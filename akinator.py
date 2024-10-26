@@ -1,4 +1,5 @@
 import json
+from collections import Counter
 
 # Carregar os dados do JSON
 def carregar_personagens():
@@ -18,63 +19,58 @@ class Personagem:
         self.idade = dados["idade"]
         self.protagonista = dados["protagonista"]
 
-# Classe para as perguntas da árvore de decisão
-class Pergunta:
-    def __init__(self, texto, chave, criterio=None):
-        self.texto = texto
-        self.chave = chave
-        self.criterio = criterio
-        self.sim = None
-        self.nao = None
-
-# Construir a árvore de perguntas
-def construir_arvore():
-    raiz = Pergunta("Seu personagem é do sexo masculino?", "sexo", "masculino")
-
-    # Perguntas com base nos atributos dos personagens
-    raiz.sim = Pergunta("Seu personagem é de um universo de super-heróis?", "tipo", "herói")
-    raiz.nao = Pergunta("Seu personagem tem superpoderes?", "superpoder", True)
-
-    raiz.sim.sim = Pergunta("Seu personagem é do universo Marvel?", "universo", "Marvel")
-    raiz.sim.nao = Pergunta("Seu personagem é o protagonista?", "protagonista", True)
-    
-    raiz.nao.sim = Pergunta("Seu personagem aparece em animação?", "animacao", True)
-    raiz.nao.nao = Pergunta("Seu personagem é jovem (idade < 25)?", "idade", "jovem")
-
-    return raiz
+    def __repr__(self):
+        return self.nome
 
 # Classe do Jogo
 class JogoAkinator:
     def __init__(self, personagens):
         self.personagens = [Personagem(p) for p in personagens]
-        self.arvore = construir_arvore()
+        self.caracteristicas = {
+            "sexo": "Seu personagem é do sexo masculino?",
+            "animacao": "Seu personagem é de uma animação?",
+            "superpoder": "Seu personagem tem superpoderes?",
+            "tipo": "Seu personagem é do tipo {}?",
+            "universo": "Seu personagem é do universo {}?",
+            "protagonista": "Seu personagem é o protagonista?"
+        }
 
-    def filtrar_personagens(self, chave, resposta, criterio):
-        if chave == "idade":
-            if resposta == "sim":
-                self.personagens = [p for p in self.personagens if p.idade < 25]
-            else:
-                self.personagens = [p for p in self.personagens if p.idade >= 25]
-        else:
-            if resposta == "sim":
-                self.personagens = [p for p in self.personagens if getattr(p, chave) == criterio]
-            else:
-                self.personagens = [p for p in self.personagens if getattr(p, chave) != criterio]
+    # Filtrar personagens com base em uma característica
+    def filtrar_personagens(self, chave, resposta):
+        self.personagens = [p for p in self.personagens if getattr(p, chave) == resposta]
+
+    # Escolher a próxima característica para perguntar
+    def proxima_pergunta(self):
+        # Conta os valores mais comuns para cada característica
+        contadores = {caract: Counter(getattr(p, caract) for p in self.personagens) for caract in self.caracteristicas}
+
+        # Escolher a característica com mais variação
+        for caract, contador in contadores.items():
+            if len(contador) > 1:  # Há variação suficiente para fazer uma pergunta
+                valor_comum = contador.most_common(1)[0][0]  # Valor mais frequente
+                return caract, valor_comum
+        return None, None
 
     def jogar(self):
-        no = self.arvore
+        while len(self.personagens) > 1:
+            caract, valor = self.proxima_pergunta()
+            if caract is None:
+                break  # Se não há mais perguntas úteis, finaliza
 
-        while no and len(self.personagens) > 1:
-            resposta = input(f"{no.texto} (sim/nao): ").strip().lower()
+            # Perguntar ao usuário sobre a característica com uma pergunta intuitiva
+            pergunta = self.caracteristicas[caract].format(valor)
+            resposta = input(f"{pergunta} (sim/nao): ").strip().lower()
             if resposta not in ["sim", "nao"]:
                 print("Por favor, responda apenas com 'sim' ou 'não'.")
                 continue
 
-            # Filtra personagens e avança para o próximo nó
-            self.filtrar_personagens(no.chave, resposta, no.criterio)
-            no = no.sim if resposta == "sim" else no.nao
+            # Filtrar com base na resposta do usuário
+            if resposta == "sim":
+                self.filtrar_personagens(caract, valor)
+            else:
+                self.personagens = [p for p in self.personagens if getattr(p, caract) != valor]
 
-        # Exibe resultado final
+        # Resultado final
         if len(self.personagens) == 1:
             print(f"Acho que seu personagem é {self.personagens[0].nome}!")
         else:
