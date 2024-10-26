@@ -1,0 +1,152 @@
+[
+    {
+        "nome": "Homem-Aranha",
+        "sexo": "masculino",
+        "animacao": true,
+        "superpoder": true,
+        "tipo": "herói",
+        "universo": "Marvel",
+        "idade": 18,
+        "protagonista": true
+    },
+    {
+        "nome": "Batman",
+        "sexo": "masculino",
+        "animacao": false,
+        "superpoder": false,
+        "tipo": "herói",
+        "universo": "DC",
+        "idade": 35,
+        "protagonista": true
+    },
+    {
+        "nome": "Mulher Maravilha",
+        "sexo": "feminino",
+        "animacao": true,
+        "superpoder": true,
+        "tipo": "herói",
+        "universo": "DC",
+        "idade": 28,
+        "protagonista": true
+    },
+    {
+        "nome": "SpongeBob",
+        "sexo": "masculino",
+        "animacao": true,
+        "superpoder": false,
+        "tipo": "animação",
+        "universo": "Nickelodeon",
+        "idade": 20,
+        "protagonista": true
+    },
+    {
+        "nome": "Superman",
+        "sexo": "masculino",
+        "animacao": false,
+        "superpoder": true,
+        "tipo": "herói",
+        "universo": "DC",
+        "idade": 30,
+        "protagonista": true
+    },
+    {
+        "nome": "Hulk",
+        "sexo": "masculino",
+        "animacao": true,
+        "superpoder": true,
+        "tipo": "herói",
+        "universo": "Marvel",
+        "idade": 35,
+        "protagonista": true
+    },
+    {
+        "nome": "Elsa",
+        "sexo": "feminino",
+        "animacao": true,
+        "superpoder": true,
+        "tipo": "animação",
+        "universo": "Disney",
+        "idade": 21,
+        "protagonista": true
+    },
+    {
+        "nome": "Harry Potter",
+        "sexo": "masculino",
+        "animacao": false,
+        "superpoder": true,
+        "tipo": "magia",
+        "universo": "Harry Potter",
+        "idade": 18,
+        "protagonista": true
+    },
+    {
+        "nome": "Gandalf",
+        "sexo": "masculino",
+        "animacao": false,
+        "superpoder": true,
+        "tipo": "fantasia",
+        "universo": "Senhor dos Anéis",
+        "idade": 1000,
+        "protagonista": true
+    },
+    {
+        "nome": "Katniss Everdeen",
+        "sexo": "feminino",
+        "animacao": false,
+        "superpoder": false,
+        "tipo": "herói",
+        "universo": "Jogos Vorazes",
+        "idade": 17,
+        "protagonista": true
+    },
+    {
+        "nome": "Sherlock Holmes",
+        "sexo": "masculino",
+        "animacao": false,
+        "superpoder": false,
+        "tipo": "detetive",
+        "universo": "Clássicos",
+        "idade": 40,
+        "protagonista": true
+    },
+    {
+        "nome": "Darth Vader",
+        "sexo": "masculino",
+        "animacao": false,
+        "superpoder": true,
+        "tipo": "sci-fi",
+        "universo": "Star Wars",
+        "idade": 45,
+        "protagonista": false
+    },
+    {
+        "nome": "Fiona",
+        "sexo": "feminino",
+        "animacao": true,
+        "superpoder": false,
+        "tipo": "animação",
+        "universo": "Shrek",
+        "idade": 25,
+        "protagonista": true
+    },
+    {
+        "nome": "Groot",
+        "sexo": "masculino",
+        "animacao": true,
+        "superpoder": true,
+        "tipo": "herói",
+        "universo": "Marvel",
+        "idade": 300,
+        "protagonista": false
+    },
+    {
+        "nome": "Black Widow",
+        "sexo": "feminino",
+        "animacao": false,
+        "superpoder": true,
+        "tipo": "herói",
+        "universo": "Marvel",
+        "idade": 30,
+        "protagonista": true
+    }
+]
